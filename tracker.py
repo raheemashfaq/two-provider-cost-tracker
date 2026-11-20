@@ -5,9 +5,8 @@ import sys
 import time
 
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
-from groq import Groq
+from gemini_call import call_gemini
+from groq_call import call_groq
 
 load_dotenv()
 
@@ -17,31 +16,6 @@ def require_env(*names):
     missing = [n for n in names if not os.getenv(n)]
     if missing:
         sys.exit(f"Missing in .env: {', '.join(missing)}. See .env.example.")
-
-
-def call_gemini(prompt, model):
-    client = genai.Client(
-        http_options=types.HttpOptions(
-            retry_options=types.HttpRetryOptions(attempts=3)
-        )
-    )
-    resp = client.models.generate_content(model=model, contents=prompt)
-    usage = resp.usage_metadata
-    # Thinking tokens are billed as output tokens, so they are included.
-    output_tokens = (usage.candidates_token_count or 0) + (usage.thoughts_token_count or 0)
-    return resp.text, usage.prompt_token_count, output_tokens
-
-
-def call_groq(prompt, model):
-    client = Groq()
-    resp = client.chat.completions.create(
-        model=model, messages=[{"role": "user", "content": prompt}]
-    )
-    return (
-        resp.choices[0].message.content,
-        resp.usage.prompt_tokens,
-        resp.usage.completion_tokens,
-    )
 
 
 def cost(tokens, price_per_million):
