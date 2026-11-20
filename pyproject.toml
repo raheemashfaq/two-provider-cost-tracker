@@ -1,7 +1,7 @@
 [project]
-name = "a1-cost-tracker"
+name = "two-provider-cost-tracker"
 version = "0.1.0"
-description = "Add your description here"
+description = "Send one prompt to Gemini and Groq and compare reply, tokens, time and cost."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -9,10 +9,3 @@ dependencies = [
     "groq>=1.7.0",
     "python-dotenv>=1.2.4",
 ]
-
-[project.scripts]
-a1-cost-tracker = "a1_cost_tracker:main"
-
-[build-system]
-requires = ["uv_build>=0.12.13,<0.13.0"]
-build-backend = "uv_build"

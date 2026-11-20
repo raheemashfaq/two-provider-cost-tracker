@@ -1,4 +1,3 @@
-"""Groq call: returns (reply, input_tokens, output_tokens)."""
 from dotenv import load_dotenv
 from groq import Groq
 

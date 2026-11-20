@@ -1,4 +1,3 @@
-"""Send one prompt to Gemini and Groq, then compare reply, tokens, time and cost."""
 import json
 import os
 import sys

@@ -1,4 +1,3 @@
-"""Gemini call: returns (reply, input_tokens, output_tokens)."""
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
